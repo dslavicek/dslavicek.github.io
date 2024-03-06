@@ -46,3 +46,21 @@ for(let i = 0; i < mapHeight * mapWidth; i++){
 }
 
 console.log(mapTiles);
+
+const mapDisplay = document.querySelector('#map')
+
+function createMap(){
+    for (let row = 0; row < mapHeight; row++){
+        const mapRow = document.createElement('div');
+        mapDisplay.appendChild(mapRow);
+        for(let col = 0; col < mapWidth; col++){
+            const mapTile = document.createElement('img');
+            mapTile.setAttribute('src', '../img/'+mapTiles[row*mapWidth+col].img);
+            console.log(mapTile, row, col);
+            //mapDisplay.appendChild(mapTile);
+            mapRow.appendChild(mapTile);
+        }
+    }
+}
+
+createMap();
