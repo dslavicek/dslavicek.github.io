@@ -117,9 +117,9 @@ if (PlayerY > 0) {
 
     const newTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
     newTile.setAttribute('src', playerImPath);
-} else {
-    console.log("Invalid move: cannot move up.");
-}
+    } else {
+        console.log("Invalid move: cannot move up.");
+    }
 }
 
 function movePlayerDown(row, col) {
@@ -134,9 +134,9 @@ if (PlayerY < mapHeight - 1) {
 
     const newTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
     newTile.setAttribute('src', playerImPath);
-} else {
-    console.log("Invalid move: cannot move down.");
-}
+    } else {
+        console.log("Invalid move: cannot move down.");
+    }
 }
 
 function movePlayerRight(row, col) {
@@ -154,7 +154,7 @@ function movePlayerRight(row, col) {
     } else {
         console.log("Invalid move: cannot move right.");
     }
-    }
+}
     
     function movePlayerLeft(row, col) {
     // Check if the move is valid (within map bounds and not a wall tile)
@@ -171,4 +171,4 @@ function movePlayerRight(row, col) {
     } else {
         console.log("Invalid move: cannot move left.");
     }
-    }
+}
