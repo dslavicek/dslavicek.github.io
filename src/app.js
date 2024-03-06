@@ -56,8 +56,8 @@ function createMap(){
         mapDisplay.appendChild(mapRow);
         for(let col = 0; col < mapWidth; col++){
             const mapTile = document.createElement('img');
-            mapTile.setAttribute('src', '../img/'+mapTiles[row*mapWidth+col].img);
-            mapTile.setAttribute('src-orig', '../img/'+mapTiles[row*mapWidth+col].img);
+            mapTile.setAttribute('src', './img/'+mapTiles[row*mapWidth+col].img);
+            mapTile.setAttribute('src-orig', './img/'+mapTiles[row*mapWidth+col].img);
             mapTile.setAttribute('row-id', row)
             mapTile.setAttribute('col-id', col)
             console.log(mapTile, row, col);
@@ -71,7 +71,7 @@ createMap();
 
 var PlayerX = 0;
 var PlayerY = 0;
-const playerImPath = "../img/knight.png";
+const playerImPath = "./img/knight.png";
 
 var playerTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`)
 playerTile.setAttribute('src', playerImPath);
