@@ -2,23 +2,28 @@
 const mapTileTypes = [
     {
         name: 'meadow',
-        img: 'meadow.png'
+        img: 'meadow.png',
+        walkable: true
     },
     {
         name: 'castle',
-        img: 'castle.png'
+        img: 'castle.png',
+        walkable: true
     },
     {
         name: 'forest',
-        img: 'forest.png'
+        img: 'forest.png',
+        walkable: true
     },
     {
         name: 'pond',
-        img: 'pond.png'
+        img: 'pond.png',
+        walkable: false
     },
     {
         name: 'village',
-        img: 'village.png'
+        img: 'village.png',
+        walkable: true
     }
 ]
 
@@ -76,38 +81,35 @@ const playerImPath = "./img/knight.png";
 var playerTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`)
 playerTile.setAttribute('src', playerImPath);
 
-
+// connect pressing WASD to movement functions
 document.addEventListener("keydown", function(event) {
 if (event.key === "d") {
-    // Function to be executed on "d" key press
     movePlayerRight(PlayerX, PlayerY);
 }
 });
 
 document.addEventListener("keydown", function(event) {
 if (event.key === "a") {
-    // Function to be executed on "d" key press
     movePlayerLeft(PlayerX, PlayerY);
 }
 });
 
 document.addEventListener("keydown", function(event) {
 if (event.key === "w") {
-    // Function to be executed on "d" key press
     movePlayerUp(PlayerX, PlayerY);
 }
 });
 
 document.addEventListener("keydown", function(event) {
 if (event.key === "s") {
-    // Function to be executed on "d" key press
     movePlayerDown(PlayerX, PlayerY);
 }
 });
 
 function movePlayerUp(row, col) {
 // Check if the move is valid (within map bounds and not a wall tile)
-if (PlayerY > 0) {    
+if (PlayerY > 0) {
+    //TODO: add if which checks that destination is walkable    
 
     // Update the position of the player tile visually (replace with your implementation)
     const currentTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
