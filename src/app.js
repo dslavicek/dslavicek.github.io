@@ -55,20 +55,23 @@ console.log(mapTiles);
 const mapDisplay = document.querySelector('#map')
 
 function createMap(){
-    for (let row = 0; row < mapHeight; row++){
+    for(let row = 0; row < mapHeight; row++){
         const mapRow = document.createElement('div');
         //mapRow.setAttribute('row-id', row)
         mapDisplay.appendChild(mapRow);
         for(let col = 0; col < mapWidth; col++){
-            const mapTile = document.createElement('img');
-            mapTile.setAttribute('src', './img/'+mapTiles[row*mapWidth+col].img);
-            mapTile.setAttribute('src-orig', './img/'+mapTiles[row*mapWidth+col].img);
-            mapTile.setAttribute('row-id', row)
-            mapTile.setAttribute('col-id', col)
-            console.log(mapTile, row, col);
+            const mapTileObject = mapTiles[row*mapWidth+col];
+            const mapTileDiv = document.createElement('img');
+            mapTileDiv.setAttribute('src', './img/'+mapTileObject.img);
+            mapTileDiv.setAttribute('src-orig', './img/'+mapTileObject.img);
+            mapTileDiv.setAttribute('row-id', row);
+            mapTileDiv.setAttribute('col-id', col);
+            mapTileDiv.setAttribute('walkable', mapTileObject.walkable);
+            console.log(mapTileDiv, row, col);
             //mapDisplay.appendChild(mapTile);
-            mapRow.appendChild(mapTile);
+            mapRow.appendChild(mapTileDiv);
         }
+        mapDisplay.appendChild(mapRow);
     }
 }
 
@@ -109,7 +112,8 @@ if (event.key === "s") {
 function movePlayerUp(row, col) {
 // Check if the move is valid (within map bounds and not a wall tile)
 if (PlayerY > 0) {
-    //TODO: add if which checks that destination is walkable    
+    //TODO: add if which checks that destination is walkable
+    
 
     // Update the position of the player tile visually (replace with your implementation)
     const currentTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
