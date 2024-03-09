@@ -63,7 +63,7 @@ function createMap(){
             const mapTileObject = mapTiles[row*mapWidth+col];
             const mapTileDiv = document.createElement('img');
             mapTileDiv.setAttribute('src', './img/'+mapTileObject.img);
-            mapTileDiv.setAttribute('src-orig', './img/'+mapTileObject.img);
+            mapTileDiv.setAttribute('src-orig', './img/'+mapTileObject.img); // original source for when knight moves off the tile
             mapTileDiv.setAttribute('row-id', row);
             mapTileDiv.setAttribute('col-id', col);
             mapTileDiv.setAttribute('walkable', mapTileObject.walkable);
@@ -109,72 +109,85 @@ if (event.key === "s") {
 }
 });
 
-function movePlayerUp(row, col) {
+function movePlayerUp() {
 // Check if the move is valid (within map bounds and not a wall tile)
 if (PlayerY > 0) {
-    //TODO: add if which checks that destination is walkable
-    
+    const targetTile = document.querySelector(`#map > div:nth-child(${PlayerY }) > img[col-id="${PlayerX}"]`);
+    if(targetTile.getAttribute('walkable') == 'true'){
+        const currentTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
+        currentTile.setAttribute('src', currentTile.getAttribute('src-orig'))
 
-    // Update the position of the player tile visually (replace with your implementation)
-    const currentTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
-    currentTile.setAttribute('src', currentTile.getAttribute('src-orig'))
-
-    PlayerY--;
-
-    const newTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
-    newTile.setAttribute('src', playerImPath);
-    } else {
-        console.log("Invalid move: cannot move up.");
+        PlayerY--;
+        targetTile.setAttribute('src', playerImPath)
+    }
+     else {
+        console.log("Invalid move: cannot move to unwalkable tile.");
     }
 }
+else {
+    console.log("Invalid move: cannot move up.");
+}
+}
 
-function movePlayerDown(row, col) {
+function movePlayerDown() {
 // Check if the move is valid (within map bounds and not a wall tile)
 if (PlayerY < mapHeight - 1) {    
+    const targetTile = document.querySelector(`#map > div:nth-child(${PlayerY +2}) > img[col-id="${PlayerX}"]`);
+    if(targetTile.getAttribute('walkable') == 'true'){
+        const currentTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
+        currentTile.setAttribute('src', currentTile.getAttribute('src-orig'))
 
-    // Update the position of the player tile visually (replace with your implementation)
-    const currentTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
-    currentTile.setAttribute('src', currentTile.getAttribute('src-orig'))
+        PlayerY++;
 
-    PlayerY++;
-
-    const newTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
-    newTile.setAttribute('src', playerImPath);
-    } else {
-        console.log("Invalid move: cannot move down.");
+        targetTile.setAttribute('src', playerImPath);
+    }
+    else {
+        console.log("Invalid move: cannot move to unwalkable tile.");
     }
 }
+else {
+    console.log("Invalid move: cannot move up.");
+}
+}
 
-function movePlayerRight(row, col) {
-    // Check if the move is valid (within map bounds and not a wall tile)
-    if (PlayerX < mapWidth - 1) {    
-    
-        // Update the position of the player tile visually (replace with your implementation)
+function movePlayerRight() {
+// Check if the move is valid (within map bounds and not a wall tile)
+if (PlayerX < mapWidth - 1) {    
+    const targetTile = document.querySelector(`#map > div:nth-child(${PlayerY +1}) > img[col-id="${PlayerX+1}"]`);
+    if(targetTile.getAttribute('walkable') == 'true'){
         const currentTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
         currentTile.setAttribute('src', currentTile.getAttribute('src-orig'))
     
         PlayerX++;
     
-        const newTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
-        newTile.setAttribute('src', playerImPath);
-    } else {
-        console.log("Invalid move: cannot move right.");
+        targetTile.setAttribute('src', playerImPath);
     }
+    else {
+        console.log("Invalid move: cannot move to unwalkable tile.");
+    }
+} 
+else {
+    console.log("Invalid move: cannot move right.");
+}
 }
     
-    function movePlayerLeft(row, col) {
-    // Check if the move is valid (within map bounds and not a wall tile)
-    if (PlayerX > 0) {    
-    
-        // Update the position of the player tile visually (replace with your implementation)
+function movePlayerLeft() {
+// Check if the move is valid (within map bounds and not a wall tile)
+if (PlayerX > 0) {    
+    const targetTile = document.querySelector(`#map > div:nth-child(${PlayerY +1}) > img[col-id="${PlayerX-1}"]`);
+    if(targetTile.getAttribute('walkable') == 'true'){
         const currentTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
         currentTile.setAttribute('src', currentTile.getAttribute('src-orig'))
-    
+
         PlayerX--;
-    
-        const newTile = document.querySelector(`#map > div:nth-child(${PlayerY + 1}) > img[col-id="${PlayerX}"]`);
-        newTile.setAttribute('src', playerImPath);
-    } else {
-        console.log("Invalid move: cannot move left.");
+
+        targetTile.setAttribute('src', playerImPath);
     }
+    else {
+        console.log("Invalid move: cannot move to unwalkable tile.");
+    }
+} 
+else {
+    console.log("Invalid move: cannot move left.");
+}
 }
